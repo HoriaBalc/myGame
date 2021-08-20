@@ -81,9 +81,6 @@ header div h1{
     
 }
 
-body{
-    position: fixed;
-}
 
 #win{
     display: none;
