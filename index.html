@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="./index.css">
     <script src="./index.js" defer></script>
     <script src="https://kit.fontawesome.com/fe13303fd6.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>2048Game</title>
 </head>
 <body>
 
     <header>
         <div>
+             <h1>2048</h1>
             <button id="start" onclick="start()">New Game</button>
+        </div>
+       
+        <div>
             <p id="score">Score: 0</p>
             <p id="best">Best: 0</p>
         </div>
@@ -21,37 +25,43 @@
     <div id="container">
         <div id="box2048">
             <div class="row">
-                <div id="box1">2</div>
+                <div id="box1">1024</div>
                 <div id="box2">4</div>
-                <div id="box3">8</div>
-                <div id="box4">16</div>
+                <div id="box3">256</div>
+                <div id="box4">128</div>
             </div>
             <div class="row">
-                <div id="box5">32</div>
-                <div id="box6">64</div>
-                <div id="box7">128</div>
-                <div id="box8">2</div>
+                <div id="box5">1024</div>
+                <div id="box6">4</div>
+                <div id="box7">256</div>
+                <div id="box8">128</div>
             </div>
             <div class="row">
-                <div id="box9">4</div>
-                <div id="box10">8</div>
-                <div id="box11">16</div>
-                <div id="box12">2</div> 
+                <div id="box9">1024</div>
+                <div id="box10">4</div>
+                <div id="box11">256</div>
+                <div id="box12">128</div> 
             </div>
             <div class="row">
-                <div id="box13">128</div>
-                <div id="box14">32</div>
-                <div id="box15">8</div>
-                <div id="box16">16</div>   
+                <div id="box13">1024</div>
+                <div id="box14">4</div>
+                <div id="box15">256</div>
+                <div id="box16">128</div>
             </div>
         </div>
       
       <div id="gameOver">
            <h2 >GameOver</h2>
+           <p id="highscore">New HighScore <i class="fas fa-birthday-cake"></i></p>
            <p>Try again</p>
            <button onclick="start()"><i class="fas fa-redo"></i></button> 
       </div>  
-     
+      <div id="win">
+        <h2 >You won</h2>
+        <button onclick="reactivate()">Keep playing</button> 
+     </div> 
+
+
     </div>
     <div>
          <button id="up" onclick="up1()"><i class="fas fa-arrow-up"></i></button>

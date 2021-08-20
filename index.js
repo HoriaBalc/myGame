@@ -1,9 +1,28 @@
 let score=0;
+let win=false;
+let alegereValoare=[2,2,2,2,2,4,2,2,2,2,2];
+const oldBest=localStorage.getItem('Best');
 let best=0;
-let alegereValoare=[2,2,2,2,2,4,2,2,2,2,2]
+let isblocked=false;
+function init(){
+    if(best<oldBest){
+        best=oldBest;
+    }
+    win=false;
+    let pBest=document.querySelector('#best').innerHTML;
+    pBest="Best: "+best;
+    document.querySelector('#best').innerHTML=pBest;
+    changeColor();
+
+}
+init();
 function start(){
     makeEmpty();
     score=0;
+    win=false;
+    if(best<oldBest){
+        best=oldBest;
+    }
     let first=Math.floor(Math.random() * 16 +1);   
     let divFirst=document.querySelector("#box"+first);    
     let second=Math.floor(Math.random() * 16 +1); 
@@ -18,7 +37,16 @@ function start(){
     loseMsg.style.display="none";
     let opacity=document.querySelector('#box2048');
     opacity.style.opacity=1;
+    changeColor();
 
+}
+
+function reactivate(){
+    let loseMsg=document.querySelector("#win");
+    loseMsg.style.display="none";
+    let opacity=document.querySelector('#box2048');
+    opacity.style.opacity=1;
+    isblocked=false;
 }
 
 function makeEmpty(){ 
@@ -269,6 +297,68 @@ function down1(){
     
 }
 
+function checkWin(){
+    for(var i=1;i<17;i++){
+        let defaultColor=document.querySelector("#box"+i).innerHTML;
+        if(defaultColor=="2048" && !win){
+            win=true;
+            let divWin=document.querySelector('#win');
+            divWin.style.display="inline";
+            let opacity=document.querySelector('#box2048');
+            opacity.style.opacity=0.4;
+            isblocked=true;
+        }
+            
+    }
+}
+
+function changeColor(){
+    for(var i=1;i<17;i++){
+        let defaultColor=document.querySelector("#box"+i);
+        switch(defaultColor.innerHTML){
+            case "":defaultColor.style.backgroundColor='#fb8500';
+                    break;
+            case "2": defaultColor.style.backgroundColor="#d9ed92";
+                    break;
+            case "4": defaultColor.style.backgroundColor="#b5e48c";
+                    break;
+            case "8": defaultColor.style.backgroundColor="#99d98c";
+                    break;        
+                    
+            case "16": defaultColor.style.backgroundColor="#76c893";
+                    break;        
+            case "32": defaultColor.style.backgroundColor="#52b69a";
+                    break;        
+            case "64": defaultColor.style.backgroundColor="#34a0a4";
+                    break;        
+            case "128": defaultColor.style.backgroundColor="#168aad";
+                    break;        
+            case "256": defaultColor.style.backgroundColor="#1a759f";
+                    break;        
+            case "512": defaultColor.style.backgroundColor="#1e6091";
+                    break;        
+            case "1024": defaultColor.style.backgroundColor="#184e77";
+                    break;        
+            case "2048": defaultColor.style.backgroundColor="#ccff33";
+                    break;        
+            case "4096": defaultColor.style.backgroundColor="#9ef01a";
+                    break;        
+            case "8192": defaultColor.style.backgroundColor="#70e000";
+                    break; 
+            case "16384": defaultColor.style.backgroundColor="#38b000";
+                    break; 
+            case "32768": defaultColor.style.backgroundColor="#008000";
+                    break; 
+            case "65536": defaultColor.style.backgroundColor="#006400";
+                    break; 
+            case "131072": defaultColor.style.backgroundColor="#004b23";
+                    break; 
+
+                    
+        }
+    }
+}
+
 function checkEnd(){
     gameOver=true;
     valoriTabela=[];
@@ -279,6 +369,9 @@ function checkEnd(){
     }
   
     for(var i=0;i<16;i++){
+           
+            
+
             if((i%4<3)&&valoriTabela[i]==valoriTabela[i+1]){
                 gameOver=false;
             }
@@ -300,50 +393,53 @@ function checkEnd(){
         console.log("GameOver");
         let loseMsg=document.querySelector("#gameOver");
         loseMsg.style.display="inline";
+        if(best==score){
+            let highScore=document.querySelector("#highscore");
+            highScore.style.display="inline";
+        }
         let opacity=document.querySelector("#box2048");
         console.log(opacity)
         opacity.style.opacity="0.4";
 
 
     }
-        
-    return gameOver;
 
+    return gameOver;
 }
 
 document.addEventListener('keydown', (event)=>{
-    var pScore=document.querySelector('#score').innerHTML;
-    var pBest=document.querySelector('#best').innerHTML;
+    let pScore=document.querySelector('#score').innerHTML;
+    let pBest=document.querySelector('#best').innerHTML;
 
     if (event.defaultPrevented) {
     return;
   }
-    if (event.key === "ArrowDown"){  
-        if (!event.repeat)  
-        down1();      
-    } else if (event.code === "ArrowUp"){
-        if (!event.repeat)
-        up1();
-    } else if (event.code === "ArrowLeft"){
-        if (!event.repeat)
-        left1();
-    } else if (event.code === "ArrowRight"){
-        if (!event.repeat)
-        right1();
+    if(!isblocked){
+        if (event.key === "ArrowDown"){  
+            if (!event.repeat)  
+            down1();      
+        } else if (event.code === "ArrowUp"){
+            if (!event.repeat)
+            up1();
+        } else if (event.code === "ArrowLeft"){
+            if (!event.repeat)
+            left1();
+        } else if (event.code === "ArrowRight"){
+            if (!event.repeat)
+            right1();
+        }
     }
     pScore="Score: "+score;
     if(best<=score){
         best=score;
+        localStorage.setItem('Best',best);
     }
-    pBest="Score: "+best;
+    pBest="Best: "+best;
     document.querySelector('#score').innerHTML=pScore;
     document.querySelector('#best').innerHTML=pBest;
-
+    changeColor();
     checkEnd();
+    checkWin();
   event.preventDefault();
 
 },true)
-
-
-
-

@@ -1,8 +1,11 @@
+
+
+
 #container{
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    background-color: #023047;
+    background-color: var(--valuenull);
     align-items: center;
     height: 150%;
     
@@ -12,6 +15,15 @@
     display: flex;
     gap:0.3rem;
     align-items: center;
+    padding: 0.2rem;
+}
+
+#container .row div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    
 }
 
 button{
@@ -35,6 +47,16 @@ header div{
     display: flex;
     text-align: center;
     flex-wrap: wrap;
+    align-self: center;
+    flex-basis: auto;
+    justify-content: center;
+}
+
+header div h1{
+    color:#fb8500;
+    font-size: 3rem;
+    margin-block-end: 0.4rem;
+    margin-block-start: 0.8rem;
 
 }
 
@@ -59,11 +81,9 @@ header div{
     
 }
 
-
-#gameOver{
+#win{
     display: none;
     font-size: 3rem;
-    top: 2rem;
     position: absolute;
     text-align: center;
     align-self: center;
@@ -71,8 +91,27 @@ header div{
     opacity: 1;
 }
 
+#gameOver{
+    display: none;
+    font-size: 3rem;
+    position: absolute;
+    text-align: center;
+    align-self: center;
+    color: beige;
+    opacity: 1;
+    
+
+}
+
+#gameOver h2{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
 #gameOver p{
-    font-size: 1rem;
+    font-size: 2rem;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
 }
 
 #gameOver button{
@@ -82,7 +121,17 @@ header div{
     border-radius: 50%;
 }
 
+#win button{
+    color: beige;
+    background-color: burlywood;
+    font-size: 1rem;
+    border-radius: 50%;
+}
 
+#highscore{
+    display:none;
+    font-size: 3rem;
+}
 
 div{
     text-align: center;
