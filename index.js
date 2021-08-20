@@ -425,18 +425,57 @@ const slider=document.querySelector('#box2048');
 slider.addEventListener('touchstart', touchStart);
 slider.addEventListener('touchend', touchEnd);
 slider.addEventListener('touchmove', touchMove);
+let startPosX;
+let startPosY;
+let movePosX;
+let movePosY;
+function touchStart(event){      
+    
+    startPosX=getPositionX(event);
+    startPosY=getPositionY(event);
 
-function touchStart(){      
-    console.log('start');
+    console.log('startX:'+ startPosX + 'startY:'+ startPosY);
 }
 
-function touchEnd(){
-    console.log('end');
-}
 
-function touchMove(){
+function touchMove(event){
     console.log('move');
+    movePosX=getPositionX(event);
+    movePosY=getPositionY(event);
+    console.log('moveX:'+ movePosX + 'moveY:'+ movePosY);
 }
+
+function touchEnd(event){
+    if(Math.abs(movePosY-startPosY)>Math.abs(movePosX-startPosX)){
+        if(movePosY-startPosY>=0){
+            down1();
+        }
+        else up1();
+    }else{
+        if(movePosX-startPosX>=0){
+            right1();
+        }
+        else left1();
+    }
+    
+}
+
+function getPositionX(event){
+    return event.type.includes('mouse') ? event.pageX: event.touches[0].clientX;
+}
+
+function getPositionY(event){
+    return event.type.includes('mouse') ? event.pageY: event.touches[0].clientY;
+}
+
+function getEndPositionX(event){
+    return event.type.includes('mouse') ? event.pageX: event.touches[0].clientX;
+}
+
+function getEndPositionY(event){
+    return event.type.includes('mouse') ? event.pageY: event.touches[0].clientY;
+}
+
 
 document.addEventListener('keydown', (event)=>{
     let pScore=document.querySelector('#score').innerHTML;
