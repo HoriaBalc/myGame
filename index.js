@@ -125,6 +125,10 @@ function right1(){
         }
         if(isShifted)
            addElement();
+        changeColor();
+        checkEnd();
+        checkWin();   
+          
     
 }
 
@@ -181,7 +185,10 @@ function left1(){
         }
         if(isShifted)
            addElement();   
-    
+        changeColor();
+        checkEnd();
+        checkWin();   
+       
 }
 
 function up1(){
@@ -237,7 +244,10 @@ function up1(){
         }
         if(isShifted)
            addElement();
-    
+        changeColor();
+        checkEnd();
+        checkWin();   
+       
 }
 
 function down1(){
@@ -294,6 +304,10 @@ function down1(){
         }
         if(isShifted)
            addElement();
+           
+        changeColor();
+        checkEnd();
+        checkWin();   
     
 }
 
@@ -405,6 +419,23 @@ function checkEnd(){
     }
 
     return gameOver;
+}
+
+const slider=document.querySelector('#box2048');
+slider.addEventListener('touchstart', touchStart);
+slider.addEventListener('touchend', touchEnd);
+slider.addEventListener('touchmove', touchMove);
+
+function touchStart(){      
+    console.log('start');
+}
+
+function touchEnd(){
+    console.log('end');
+}
+
+function touchMove(){
+    console.log('move');
 }
 
 document.addEventListener('keydown', (event)=>{
