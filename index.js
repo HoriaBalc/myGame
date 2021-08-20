@@ -5,6 +5,7 @@ const oldBest=localStorage.getItem('Best');
 let best=0;
 let isblocked=false;
 function init(){
+    start();
     if(best<oldBest){
         best=oldBest;
     }
