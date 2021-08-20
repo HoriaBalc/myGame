@@ -458,6 +458,14 @@ function touchEnd(event){
         }
         else left1();
     }
+    pScore="Score: "+score;
+    if(best<=score){
+        best=score;
+        localStorage.setItem('Best',best);
+    }
+    pBest="Best: "+best;
+    document.querySelector('#score').innerHTML=pScore;
+    document.querySelector('#best').innerHTML=pBest;
     
 }
 
@@ -468,15 +476,6 @@ function getPositionX(event){
 function getPositionY(event){
     return event.type.includes('mouse') ? event.pageY: event.touches[0].clientY;
 }
-
-function getEndPositionX(event){
-    return event.type.includes('mouse') ? event.pageX: event.touches[0].clientX;
-}
-
-function getEndPositionY(event){
-    return event.type.includes('mouse') ? event.pageY: event.touches[0].clientY;
-}
-
 
 document.addEventListener('keydown', (event)=>{
     let pScore=document.querySelector('#score').innerHTML;
