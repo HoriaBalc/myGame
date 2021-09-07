@@ -39,7 +39,9 @@ function start(){
     let opacity=document.querySelector('#box2048');
     opacity.style.opacity=1;
     changeColor();
-
+    pScore="Score: "+score;
+    document.querySelector('#score').innerHTML=pScore;
+    document
 }
 
 function reactivate(){
